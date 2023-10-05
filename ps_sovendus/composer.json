@@ -1,12 +1,11 @@
 {
   "name": "sovendus/ps_sovendus",
   "description": "Sovendus Voucher Network & Checkout Benefits",
-  "homepage": "https://github.com/PrestaShop/ps_sovendus",
+  "homepage": "https://online.sovendus.com/kontakt/kontakt-firmenkunden/",
   "license": "GPL-3.0",
   "authors": [
     {
-      "name": "Sovendus - Marcus Brandstätter",
-      "email": "contact@prestashop.com"
+      "name": "Sovendus - Marcus Brandstätter"
     }
   ],
   "require": {

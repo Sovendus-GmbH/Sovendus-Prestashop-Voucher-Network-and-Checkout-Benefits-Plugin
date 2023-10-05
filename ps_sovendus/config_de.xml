@@ -2,7 +2,7 @@
 <module>
     <name>ps_sovendus</name>
     <displayName><![CDATA[Sovendus Voucher Network & Checkout Benefits]]></displayName>
-    <version><![CDATA[1.0.0]]></version>
+    <version><![CDATA[1.0.1]]></version>
     <description><![CDATA[Offizielles Sovendus Voucher Network & Checkout Benefits Modul für Prestashop]]></description>
     <author><![CDATA[Sovendus - Marcus Brandstätter]]></author>
     <tab><![CDATA[front_office_features]]></tab>
