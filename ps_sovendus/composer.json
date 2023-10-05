@@ -1,0 +1,19 @@
+{
+  "name": "sovendus/ps_sovendus",
+  "description": "Sovendus Voucher Network & Checkout Benefits",
+  "homepage": "https://github.com/PrestaShop/ps_sovendus",
+  "license": "GPL-3.0",
+  "authors": [
+    {
+      "name": "Sovendus - Marcus Brandstätter",
+      "email": "contact@prestashop.com"
+    }
+  ],
+  "require": {
+    "php": ">=5.4.0"
+  },
+  "require-dev": {
+    "prestashop/php-dev-tools": "^3.4"
+  },
+  "type": "prestashop-module"
+}
