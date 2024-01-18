@@ -63,7 +63,7 @@ class Ps_Sovendus extends Module
     {
         $this->name = 'ps_sovendus';
         $this->author = 'Sovendus - Marcus Brandstätter';
-        $this->version = '1.1.1';
+        $this->version = '1.1.2';
         $this->tab = 'front_office_features';
         $this->need_instance = 0;
 
