@@ -18,9 +18,12 @@ class Ps_Sovendus extends Module
     const NL_SOVENDUS_TRAFFIC_SOURCE_NUMBER = "NL_SOVENDUS_TRAFFIC_SOURCE_NUMBER";
     const NL_SOVENDUS_TRAFFIC_MEDIUM_NUMBER = "NL_SOVENDUS_TRAFFIC_MEDIUM_NUMBER";
     
-    const CH_SOVENDUS_ACTIVE = "CH_SOVENDUS_ACTIVE";
-    const CH_SOVENDUS_TRAFFIC_SOURCE_NUMBER = "CH_SOVENDUS_TRAFFIC_SOURCE_NUMBER";
-    const CH_SOVENDUS_TRAFFIC_MEDIUM_NUMBER = "CH_SOVENDUS_TRAFFIC_MEDIUM_NUMBER";
+    const DE_CH_SOVENDUS_ACTIVE = "DE_CH_SOVENDUS_ACTIVE";
+    const DE_CH_SOVENDUS_TRAFFIC_SOURCE_NUMBER = "DE_CH_SOVENDUS_TRAFFIC_SOURCE_NUMBER";
+    const DE_CH_SOVENDUS_TRAFFIC_MEDIUM_NUMBER = "DE_CH_SOVENDUS_TRAFFIC_MEDIUM_NUMBER";
+    const FR_CH_SOVENDUS_ACTIVE = "FR_CH_SOVENDUS_ACTIVE";
+    const FR_CH_SOVENDUS_TRAFFIC_SOURCE_NUMBER = "FR_CH_SOVENDUS_TRAFFIC_SOURCE_NUMBER";
+    const FR_CH_SOVENDUS_TRAFFIC_MEDIUM_NUMBER = "FR_CH_SOVENDUS_TRAFFIC_MEDIUM_NUMBER";
     
     const FR_SOVENDUS_ACTIVE = "FR_SOVENDUS_ACTIVE";
     const FR_SOVENDUS_TRAFFIC_SOURCE_NUMBER = "FR_SOVENDUS_TRAFFIC_SOURCE_NUMBER";
@@ -50,9 +53,14 @@ class Ps_Sovendus extends Module
     const ES_SOVENDUS_TRAFFIC_SOURCE_NUMBER = "ES_SOVENDUS_TRAFFIC_SOURCE_NUMBER";
     const ES_SOVENDUS_TRAFFIC_MEDIUM_NUMBER = "ES_SOVENDUS_TRAFFIC_MEDIUM_NUMBER";
     
-    const BE_SOVENDUS_ACTIVE = "BE_SOVENDUS_ACTIVE";
-    const BE_SOVENDUS_TRAFFIC_SOURCE_NUMBER = "BE_SOVENDUS_TRAFFIC_SOURCE_NUMBER";
-    const BE_SOVENDUS_TRAFFIC_MEDIUM_NUMBER = "BE_SOVENDUS_TRAFFIC_MEDIUM_NUMBER";
+    const NL_BE_SOVENDUS_ACTIVE = "NL_BE_SOVENDUS_ACTIVE";
+    const NL_BE_SOVENDUS_TRAFFIC_SOURCE_NUMBER = "NL_BE_SOVENDUS_TRAFFIC_SOURCE_NUMBER";
+    const NL_BE_SOVENDUS_TRAFFIC_MEDIUM_NUMBER = "NL_BE_SOVENDUS_TRAFFIC_MEDIUM_NUMBER";
+
+
+    const FR_BE_SOVENDUS_ACTIVE = "FR_BE_SOVENDUS_ACTIVE";
+    const FR_BE_SOVENDUS_TRAFFIC_SOURCE_NUMBER = "FR_BE_SOVENDUS_TRAFFIC_SOURCE_NUMBER";
+    const FR_BE_SOVENDUS_TRAFFIC_MEDIUM_NUMBER = "FR_BE_SOVENDUS_TRAFFIC_MEDIUM_NUMBER";
     
     const PL_SOVENDUS_ACTIVE = "PL_SOVENDUS_ACTIVE";
     const PL_SOVENDUS_TRAFFIC_SOURCE_NUMBER = "PL_SOVENDUS_TRAFFIC_SOURCE_NUMBER";
@@ -63,7 +71,7 @@ class Ps_Sovendus extends Module
     {
         $this->name = 'ps_sovendus';
         $this->author = 'Sovendus - Marcus Brandstätter';
-        $this->version = '1.1.2';
+        $this->version = '1.1.3';
         $this->tab = 'front_office_features';
         $this->need_instance = 0;
 
@@ -91,9 +99,12 @@ class Ps_Sovendus extends Module
             && Configuration::updateValue(self::NL_SOVENDUS_ACTIVE, 0)
             && Configuration::updateValue(self::NL_SOVENDUS_TRAFFIC_SOURCE_NUMBER, "")
             && Configuration::updateValue(self::NL_SOVENDUS_TRAFFIC_MEDIUM_NUMBER, "")
-            && Configuration::updateValue(self::CH_SOVENDUS_ACTIVE, 0)
-            && Configuration::updateValue(self::CH_SOVENDUS_TRAFFIC_SOURCE_NUMBER, "")
-            && Configuration::updateValue(self::CH_SOVENDUS_TRAFFIC_MEDIUM_NUMBER, "")
+            && Configuration::updateValue(self::DE_CH_SOVENDUS_ACTIVE, 0)
+            && Configuration::updateValue(self::DE_CH_SOVENDUS_TRAFFIC_SOURCE_NUMBER, "")
+            && Configuration::updateValue(self::DE_CH_SOVENDUS_TRAFFIC_MEDIUM_NUMBER, "")
+            && Configuration::updateValue(self::FR_CH_SOVENDUS_ACTIVE, 0)
+            && Configuration::updateValue(self::FR_CH_SOVENDUS_TRAFFIC_SOURCE_NUMBER, "")
+            && Configuration::updateValue(self::FR_CH_SOVENDUS_TRAFFIC_MEDIUM_NUMBER, "")
             && Configuration::updateValue(self::FR_SOVENDUS_ACTIVE, 0)
             && Configuration::updateValue(self::FR_SOVENDUS_TRAFFIC_SOURCE_NUMBER, "")
             && Configuration::updateValue(self::FR_SOVENDUS_TRAFFIC_MEDIUM_NUMBER, "")
@@ -115,9 +126,12 @@ class Ps_Sovendus extends Module
             && Configuration::updateValue(self::ES_SOVENDUS_ACTIVE, 0)
             && Configuration::updateValue(self::ES_SOVENDUS_TRAFFIC_SOURCE_NUMBER, "")
             && Configuration::updateValue(self::ES_SOVENDUS_TRAFFIC_MEDIUM_NUMBER, "")
-            && Configuration::updateValue(self::BE_SOVENDUS_ACTIVE, 0)
-            && Configuration::updateValue(self::BE_SOVENDUS_TRAFFIC_SOURCE_NUMBER, "")
-            && Configuration::updateValue(self::BE_SOVENDUS_TRAFFIC_MEDIUM_NUMBER, "")
+            && Configuration::updateValue(self::NL_BE_SOVENDUS_ACTIVE, 0)
+            && Configuration::updateValue(self::NL_BE_SOVENDUS_TRAFFIC_SOURCE_NUMBER, "")
+            && Configuration::updateValue(self::NL_BE_SOVENDUS_TRAFFIC_MEDIUM_NUMBER, "")
+            && Configuration::updateValue(self::FR_BE_SOVENDUS_ACTIVE, 0)
+            && Configuration::updateValue(self::FR_BE_SOVENDUS_TRAFFIC_SOURCE_NUMBER, "")
+            && Configuration::updateValue(self::FR_BE_SOVENDUS_TRAFFIC_MEDIUM_NUMBER, "")
             && Configuration::updateValue(self::PL_SOVENDUS_ACTIVE, 0)
             && Configuration::updateValue(self::PL_SOVENDUS_TRAFFIC_SOURCE_NUMBER, "")
             && Configuration::updateValue(self::PL_SOVENDUS_TRAFFIC_MEDIUM_NUMBER, "")
@@ -175,8 +189,9 @@ class Ps_Sovendus extends Module
                 "email" => $email,
                 "sessionId" => $sessionId,
                 "usedCouponCode" => $usedCouponCode,
-                "trafficSourceNumber" => $trafficSourceNumber,
-                "trafficMediumNumber" => $trafficMediumNumber,
+                "isActive"=> json_encode($sovendusActive),
+                "trafficSourceNumber" => json_encode($trafficSourceNumber),
+                "trafficMediumNumber" => json_encode($trafficMediumNumber),
             )
         );
         return $this->display(__FILE__, 'views/templates/hook/psSovendus.tpl');
@@ -184,7 +199,7 @@ class Ps_Sovendus extends Module
 
     function getSovendusConfig($countryCode)
     {
-        switch($countryCode){
+        switch ($countryCode) {
             case 'DE':
                 $sovendusActive = Tools::getValue(self::DE_SOVENDUS_ACTIVE, Configuration::get(self::DE_SOVENDUS_ACTIVE));
                 $trafficSourceNumber = Tools::getValue(self::DE_SOVENDUS_TRAFFIC_SOURCE_NUMBER, Configuration::get(self::DE_SOVENDUS_TRAFFIC_SOURCE_NUMBER));
@@ -201,9 +216,18 @@ class Ps_Sovendus extends Module
                 $trafficMediumNumber = Tools::getValue(self::NL_SOVENDUS_TRAFFIC_MEDIUM_NUMBER, Configuration::get(self::NL_SOVENDUS_TRAFFIC_MEDIUM_NUMBER));
                 break;
             case 'CH':
-                $sovendusActive = Tools::getValue(self::CH_SOVENDUS_ACTIVE, Configuration::get(self::CH_SOVENDUS_ACTIVE));
-                $trafficSourceNumber = Tools::getValue(self::CH_SOVENDUS_TRAFFIC_SOURCE_NUMBER, Configuration::get(self::CH_SOVENDUS_TRAFFIC_SOURCE_NUMBER));
-                $trafficMediumNumber = Tools::getValue(self::CH_SOVENDUS_TRAFFIC_MEDIUM_NUMBER, Configuration::get(self::CH_SOVENDUS_TRAFFIC_MEDIUM_NUMBER));
+                $sovendusActive = array(
+                    "de" => Tools::getValue(self::DE_CH_SOVENDUS_ACTIVE, Configuration::get(self::DE_CH_SOVENDUS_ACTIVE)),
+                    "fr" => Tools::getValue(self::FR_CH_SOVENDUS_ACTIVE, Configuration::get(self::FR_CH_SOVENDUS_ACTIVE))
+                );
+                $trafficSourceNumber = array(
+                    "de" => Tools::getValue(self::DE_CH_SOVENDUS_TRAFFIC_SOURCE_NUMBER, Configuration::get(self::DE_CH_SOVENDUS_TRAFFIC_SOURCE_NUMBER)),
+                    "fr" => Tools::getValue(self::FR_CH_SOVENDUS_TRAFFIC_SOURCE_NUMBER, Configuration::get(self::FR_CH_SOVENDUS_TRAFFIC_SOURCE_NUMBER))
+                );
+                $trafficMediumNumber = array(
+                    "de" => Tools::getValue(self::DE_CH_SOVENDUS_TRAFFIC_MEDIUM_NUMBER, Configuration::get(self::DE_CH_SOVENDUS_TRAFFIC_MEDIUM_NUMBER)),
+                    "fr" => Tools::getValue(self::FR_CH_SOVENDUS_TRAFFIC_MEDIUM_NUMBER, Configuration::get(self::FR_CH_SOVENDUS_TRAFFIC_MEDIUM_NUMBER))
+                );
                 break;
             case 'FR':
                 $sovendusActive = Tools::getValue(self::FR_SOVENDUS_ACTIVE, Configuration::get(self::FR_SOVENDUS_ACTIVE));
@@ -241,9 +265,18 @@ class Ps_Sovendus extends Module
                 $trafficMediumNumber = Tools::getValue(self::ES_SOVENDUS_TRAFFIC_MEDIUM_NUMBER, Configuration::get(self::ES_SOVENDUS_TRAFFIC_MEDIUM_NUMBER));
                 break;
             case 'BE':
-                $sovendusActive = Tools::getValue(self::BE_SOVENDUS_ACTIVE, Configuration::get(self::BE_SOVENDUS_ACTIVE));
-                $trafficSourceNumber = Tools::getValue(self::BE_SOVENDUS_TRAFFIC_SOURCE_NUMBER, Configuration::get(self::BE_SOVENDUS_TRAFFIC_SOURCE_NUMBER));
-                $trafficMediumNumber = Tools::getValue(self::BE_SOVENDUS_TRAFFIC_MEDIUM_NUMBER, Configuration::get(self::BE_SOVENDUS_TRAFFIC_MEDIUM_NUMBER));
+                $sovendusActive = array(
+                    "nl" => Tools::getValue(self::NL_BE_SOVENDUS_ACTIVE, Configuration::get(self::NL_BE_SOVENDUS_ACTIVE)),
+                    "fr" => Tools::getValue(self::FR_BE_SOVENDUS_ACTIVE, Configuration::get(self::FR_BE_SOVENDUS_ACTIVE))
+                );
+                $trafficSourceNumber = array(
+                    "nl" => Tools::getValue(self::NL_BE_SOVENDUS_TRAFFIC_SOURCE_NUMBER, Configuration::get(self::NL_BE_SOVENDUS_TRAFFIC_SOURCE_NUMBER)),
+                    "fr" => Tools::getValue(self::FR_BE_SOVENDUS_TRAFFIC_SOURCE_NUMBER, Configuration::get(self::FR_BE_SOVENDUS_TRAFFIC_SOURCE_NUMBER))
+                );
+                $trafficMediumNumber = array(
+                    "nl" => Tools::getValue(self::NL_BE_SOVENDUS_TRAFFIC_MEDIUM_NUMBER, Configuration::get(self::NL_BE_SOVENDUS_TRAFFIC_MEDIUM_NUMBER)),
+                    "fr" => Tools::getValue(self::FR_BE_SOVENDUS_TRAFFIC_MEDIUM_NUMBER, Configuration::get(self::FR_BE_SOVENDUS_TRAFFIC_MEDIUM_NUMBER))
+                );
                 break;
             case 'PL':
                 $sovendusActive = Tools::getValue(self::PL_SOVENDUS_ACTIVE, Configuration::get(self::PL_SOVENDUS_ACTIVE));
@@ -289,12 +322,19 @@ class Ps_Sovendus extends Module
             $NL_sourceNumber = Tools::getValue(self::NL_SOVENDUS_TRAFFIC_SOURCE_NUMBER);
             Configuration::updateValue(self::NL_SOVENDUS_TRAFFIC_SOURCE_NUMBER, (int) $NL_sourceNumber);
             
-            $CH_sovendusActive = Tools::getValue(self::CH_SOVENDUS_ACTIVE);
-            Configuration::updateValue(self::CH_SOVENDUS_ACTIVE, (int) $CH_sovendusActive);
-            $CH_mediumNumber = Tools::getValue(self::CH_SOVENDUS_TRAFFIC_MEDIUM_NUMBER);
-            Configuration::updateValue(self::CH_SOVENDUS_TRAFFIC_MEDIUM_NUMBER, (int) $CH_mediumNumber);
-            $CH_sourceNumber = Tools::getValue(self::CH_SOVENDUS_TRAFFIC_SOURCE_NUMBER);
-            Configuration::updateValue(self::CH_SOVENDUS_TRAFFIC_SOURCE_NUMBER, (int) $CH_sourceNumber);
+            $DE_CH_sovendusActive = Tools::getValue(self::DE_CH_SOVENDUS_ACTIVE);
+            Configuration::updateValue(self::DE_CH_SOVENDUS_ACTIVE, (int) $DE_CH_sovendusActive);
+            $DE_CH_mediumNumber = Tools::getValue(self::DE_CH_SOVENDUS_TRAFFIC_MEDIUM_NUMBER);
+            Configuration::updateValue(self::DE_CH_SOVENDUS_TRAFFIC_MEDIUM_NUMBER, (int) $DE_CH_mediumNumber);
+            $DE_CH_sourceNumber = Tools::getValue(self::DE_CH_SOVENDUS_TRAFFIC_SOURCE_NUMBER);
+            Configuration::updateValue(self::DE_CH_SOVENDUS_TRAFFIC_SOURCE_NUMBER, (int) $DE_CH_sourceNumber);
+
+            $FR_CH_sovendusActive = Tools::getValue(self::FR_CH_SOVENDUS_ACTIVE);
+            Configuration::updateValue(self::FR_CH_SOVENDUS_ACTIVE, (int) $FR_CH_sovendusActive);
+            $FR_CH_mediumNumber = Tools::getValue(self::FR_CH_SOVENDUS_TRAFFIC_MEDIUM_NUMBER);
+            Configuration::updateValue(self::FR_CH_SOVENDUS_TRAFFIC_MEDIUM_NUMBER, (int) $FR_CH_mediumNumber);
+            $FR_CH_sourceNumber = Tools::getValue(self::FR_CH_SOVENDUS_TRAFFIC_SOURCE_NUMBER);
+            Configuration::updateValue(self::FR_CH_SOVENDUS_TRAFFIC_SOURCE_NUMBER, (int) $FR_CH_sourceNumber);
             
             $FR_sovendusActive = Tools::getValue(self::FR_SOVENDUS_ACTIVE);
             Configuration::updateValue(self::FR_SOVENDUS_ACTIVE, (int) $FR_sovendusActive);
@@ -345,12 +385,19 @@ class Ps_Sovendus extends Module
             $ES_sourceNumber = Tools::getValue(self::ES_SOVENDUS_TRAFFIC_SOURCE_NUMBER);
             Configuration::updateValue(self::ES_SOVENDUS_TRAFFIC_SOURCE_NUMBER, (int) $ES_sourceNumber);
             
-            $BE_sovendusActive = Tools::getValue(self::BE_SOVENDUS_ACTIVE);
-            Configuration::updateValue(self::BE_SOVENDUS_ACTIVE, (int) $BE_sovendusActive);
-            $BE_mediumNumber = Tools::getValue(self::BE_SOVENDUS_TRAFFIC_MEDIUM_NUMBER);
-            Configuration::updateValue(self::BE_SOVENDUS_TRAFFIC_MEDIUM_NUMBER, (int) $BE_mediumNumber);
-            $BE_sourceNumber = Tools::getValue(self::BE_SOVENDUS_TRAFFIC_SOURCE_NUMBER);
-            Configuration::updateValue(self::BE_SOVENDUS_TRAFFIC_SOURCE_NUMBER, (int) $BE_sourceNumber);
+            $NL_BE_sovendusActive = Tools::getValue(self::NL_BE_SOVENDUS_ACTIVE);
+            Configuration::updateValue(self::NL_BE_SOVENDUS_ACTIVE, (int) $NL_BE_sovendusActive);
+            $NL_BE_mediumNumber = Tools::getValue(self::NL_BE_SOVENDUS_TRAFFIC_MEDIUM_NUMBER);
+            Configuration::updateValue(self::NL_BE_SOVENDUS_TRAFFIC_MEDIUM_NUMBER, (int) $NL_BE_mediumNumber);
+            $NL_BE_sourceNumber = Tools::getValue(self::NL_BE_SOVENDUS_TRAFFIC_SOURCE_NUMBER);
+            Configuration::updateValue(self::NL_BE_SOVENDUS_TRAFFIC_SOURCE_NUMBER, (int) $NL_BE_sourceNumber);
+
+            $FR_BE_sovendusActive = Tools::getValue(self::FR_BE_SOVENDUS_ACTIVE);
+            Configuration::updateValue(self::FR_BE_SOVENDUS_ACTIVE, (int) $FR_BE_sovendusActive);
+            $FR_BE_mediumNumber = Tools::getValue(self::FR_BE_SOVENDUS_TRAFFIC_MEDIUM_NUMBER);
+            Configuration::updateValue(self::FR_BE_SOVENDUS_TRAFFIC_MEDIUM_NUMBER, (int) $FR_BE_mediumNumber);
+            $FR_BE_sourceNumber = Tools::getValue(self::FR_BE_SOVENDUS_TRAFFIC_SOURCE_NUMBER);
+            Configuration::updateValue(self::FR_BE_SOVENDUS_TRAFFIC_SOURCE_NUMBER, (int) $FR_BE_sourceNumber);
             
             $PL_sovendusActive = Tools::getValue(self::PL_SOVENDUS_ACTIVE);
             Configuration::updateValue(self::PL_SOVENDUS_ACTIVE, (int) $PL_sovendusActive);
@@ -519,14 +566,14 @@ class Ps_Sovendus extends Module
             [
                 'form' => [
                     'legend' => [
-                        'title' => $this->l('Switzerland Settings'),
+                        'title' => $this->l('Switzerland German Settings'),
                         'icon' => 'icon-cogs',
                     ],
                     'input' => [
                         [
                             'type' => 'radio',
-                            'label' => $this->l('Enable Sovendus Switzerland'),
-                            'name' => self::CH_SOVENDUS_ACTIVE,
+                            'label' => $this->l('Enable Sovendus Switzerland German'),
+                            'name' => self::DE_CH_SOVENDUS_ACTIVE,
                             'desc' => $this->l('This will enable the sovendus banner on the post checkout page.'),
                             'class' => 't',
                             'is_bool' => true,
@@ -546,15 +593,63 @@ class Ps_Sovendus extends Module
                         ],
                         [
                             'type' => 'text',
-                            'label' => $this->l('Switzerland Traffic Source Number'),
-                            'name' => self::CH_SOVENDUS_TRAFFIC_SOURCE_NUMBER,
+                            'label' => $this->l('Switzerland German Traffic Source Number'),
+                            'name' => self::DE_CH_SOVENDUS_TRAFFIC_SOURCE_NUMBER,
                             'desc' => $this->l('Enter the traffic source number from your integration documentation.'),
                             'hint' => $this->l('The traffic source number is used to assign your store in the Sovendus system. You can find it in your integration documentation.'),
                         ],
                         [
                             'type' => 'text',
-                            'label' => $this->l('Switzerland Traffic Medium Number'),
-                            'name' => self::CH_SOVENDUS_TRAFFIC_MEDIUM_NUMBER,
+                            'label' => $this->l('Switzerland German Traffic Medium Number'),
+                            'name' => self::DE_CH_SOVENDUS_TRAFFIC_MEDIUM_NUMBER,
+                            'desc' => $this->l('Enter the traffic medium number from your integration documentation.'),
+                            'hint' => $this->l('The traffic medium number is used to assign your integration in the Sovendus system. You can find it in your integration documentation.'),
+                        ],
+                    ],
+                    'submit' => [
+                        'title' => $this->trans('Save', [], 'Admin.Actions'),
+                    ],
+                ],
+            ],
+            [
+                'form' => [
+                    'legend' => [
+                        'title' => $this->l('Switzerland French Settings'),
+                        'icon' => 'icon-cogs',
+                    ],
+                    'input' => [
+                        [
+                            'type' => 'radio',
+                            'label' => $this->l('Enable Sovendus Switzerland French'),
+                            'name' => self::FR_CH_SOVENDUS_ACTIVE,
+                            'desc' => $this->l('This will enable the sovendus banner on the post checkout page.'),
+                            'class' => 't',
+                            'is_bool' => true,
+                            'default' => 0,
+                            'values' => array(
+                                array(
+                                    'id' => 'active_on',
+                                    'value' => 1,
+                                    'label' => $this->l('Enabled')
+                                ),
+                                array(
+                                    'id' => 'active_off',
+                                    'value' => 0,
+                                    'label' => $this->l('Disabled')
+                                )
+                            ),
+                        ],
+                        [
+                            'type' => 'text',
+                            'label' => $this->l('Switzerland French Traffic Source Number'),
+                            'name' => self::FR_CH_SOVENDUS_TRAFFIC_SOURCE_NUMBER,
+                            'desc' => $this->l('Enter the traffic source number from your integration documentation.'),
+                            'hint' => $this->l('The traffic source number is used to assign your store in the Sovendus system. You can find it in your integration documentation.'),
+                        ],
+                        [
+                            'type' => 'text',
+                            'label' => $this->l('Switzerland French Traffic Medium Number'),
+                            'name' => self::FR_CH_SOVENDUS_TRAFFIC_MEDIUM_NUMBER,
                             'desc' => $this->l('Enter the traffic medium number from your integration documentation.'),
                             'hint' => $this->l('The traffic medium number is used to assign your integration in the Sovendus system. You can find it in your integration documentation.'),
                         ],
@@ -903,14 +998,14 @@ class Ps_Sovendus extends Module
             [
                 'form' => [
                     'legend' => [
-                        'title' => $this->l('Belgium Settings'),
+                        'title' => $this->l('Belgium Dutch Settings'),
                         'icon' => 'icon-cogs',
                     ],
                     'input' => [
                         [
                             'type' => 'radio',
-                            'label' => $this->l('Enable Sovendus Belgium'),
-                            'name' => self::BE_SOVENDUS_ACTIVE,
+                            'label' => $this->l('Enable Sovendus Belgium Dutch'),
+                            'name' => self::NL_BE_SOVENDUS_ACTIVE,
                             'desc' => $this->l('This will enable the sovendus banner on the post checkout page.'),
                             'class' => 't',
                             'is_bool' => true,
@@ -930,15 +1025,63 @@ class Ps_Sovendus extends Module
                         ],
                         [
                             'type' => 'text',
-                            'label' => $this->l('Belgium Traffic Source Number'),
-                            'name' => self::BE_SOVENDUS_TRAFFIC_SOURCE_NUMBER,
+                            'label' => $this->l('Belgium Dutch Traffic Source Number'),
+                            'name' => self::NL_BE_SOVENDUS_TRAFFIC_SOURCE_NUMBER,
                             'desc' => $this->l('Enter the traffic source number from your integration documentation.'),
                             'hint' => $this->l('The traffic source number is used to assign your store in the Sovendus system. You can find it in your integration documentation.'),
                         ],
                         [
                             'type' => 'text',
-                            'label' => $this->l('Belgium Traffic Medium Number'),
-                            'name' => self::BE_SOVENDUS_TRAFFIC_MEDIUM_NUMBER,
+                            'label' => $this->l('Belgium Dutch Traffic Medium Number'),
+                            'name' => self::NL_BE_SOVENDUS_TRAFFIC_MEDIUM_NUMBER,
+                            'desc' => $this->l('Enter the traffic medium number from your integration documentation.'),
+                            'hint' => $this->l('The traffic medium number is used to assign your integration in the Sovendus system. You can find it in your integration documentation.'),
+                        ],
+                    ],
+                    'submit' => [
+                        'title' => $this->trans('Save', [], 'Admin.Actions'),
+                    ],
+                ],
+            ],
+            [
+                'form' => [
+                    'legend' => [
+                        'title' => $this->l('Belgium French Settings'),
+                        'icon' => 'icon-cogs',
+                    ],
+                    'input' => [
+                        [
+                            'type' => 'radio',
+                            'label' => $this->l('Enable Sovendus Belgium French'),
+                            'name' => self::FR_BE_SOVENDUS_ACTIVE,
+                            'desc' => $this->l('This will enable the sovendus banner on the post checkout page.'),
+                            'class' => 't',
+                            'is_bool' => true,
+                            'default' => 0,
+                            'values' => array(
+                                array(
+                                    'id' => 'active_on',
+                                    'value' => 1,
+                                    'label' => $this->l('Enabled')
+                                ),
+                                array(
+                                    'id' => 'active_off',
+                                    'value' => 0,
+                                    'label' => $this->l('Disabled')
+                                )
+                            ),
+                        ],
+                        [
+                            'type' => 'text',
+                            'label' => $this->l('Belgium French Traffic Source Number'),
+                            'name' => self::FR_BE_SOVENDUS_TRAFFIC_SOURCE_NUMBER,
+                            'desc' => $this->l('Enter the traffic source number from your integration documentation.'),
+                            'hint' => $this->l('The traffic source number is used to assign your store in the Sovendus system. You can find it in your integration documentation.'),
+                        ],
+                        [
+                            'type' => 'text',
+                            'label' => $this->l('Belgium French Traffic Medium Number'),
+                            'name' => self::FR_BE_SOVENDUS_TRAFFIC_MEDIUM_NUMBER,
                             'desc' => $this->l('Enter the traffic medium number from your integration documentation.'),
                             'hint' => $this->l('The traffic medium number is used to assign your integration in the Sovendus system. You can find it in your integration documentation.'),
                         ],
@@ -1038,9 +1181,13 @@ class Ps_Sovendus extends Module
             self::NL_SOVENDUS_TRAFFIC_SOURCE_NUMBER => Tools::getValue(self::NL_SOVENDUS_TRAFFIC_SOURCE_NUMBER, Configuration::get(self::NL_SOVENDUS_TRAFFIC_SOURCE_NUMBER)),
             self::NL_SOVENDUS_TRAFFIC_MEDIUM_NUMBER => Tools::getValue(self::NL_SOVENDUS_TRAFFIC_MEDIUM_NUMBER, Configuration::get(self::NL_SOVENDUS_TRAFFIC_MEDIUM_NUMBER)),
             
-            self::CH_SOVENDUS_ACTIVE => Tools::getValue(self::CH_SOVENDUS_ACTIVE, Configuration::get(self::CH_SOVENDUS_ACTIVE)),
-            self::CH_SOVENDUS_TRAFFIC_SOURCE_NUMBER => Tools::getValue(self::CH_SOVENDUS_TRAFFIC_SOURCE_NUMBER, Configuration::get(self::CH_SOVENDUS_TRAFFIC_SOURCE_NUMBER)),
-            self::CH_SOVENDUS_TRAFFIC_MEDIUM_NUMBER => Tools::getValue(self::CH_SOVENDUS_TRAFFIC_MEDIUM_NUMBER, Configuration::get(self::CH_SOVENDUS_TRAFFIC_MEDIUM_NUMBER)),
+            self::DE_CH_SOVENDUS_ACTIVE => Tools::getValue(self::DE_CH_SOVENDUS_ACTIVE, Configuration::get(self::DE_CH_SOVENDUS_ACTIVE)),
+            self::DE_CH_SOVENDUS_TRAFFIC_SOURCE_NUMBER => Tools::getValue(self::DE_CH_SOVENDUS_TRAFFIC_SOURCE_NUMBER, Configuration::get(self::DE_CH_SOVENDUS_TRAFFIC_SOURCE_NUMBER)),
+            self::DE_CH_SOVENDUS_TRAFFIC_MEDIUM_NUMBER => Tools::getValue(self::DE_CH_SOVENDUS_TRAFFIC_MEDIUM_NUMBER, Configuration::get(self::DE_CH_SOVENDUS_TRAFFIC_MEDIUM_NUMBER)),
+
+            self::FR_CH_SOVENDUS_ACTIVE => Tools::getValue(self::FR_CH_SOVENDUS_ACTIVE, Configuration::get(self::FR_CH_SOVENDUS_ACTIVE)),
+            self::FR_CH_SOVENDUS_TRAFFIC_SOURCE_NUMBER => Tools::getValue(self::FR_CH_SOVENDUS_TRAFFIC_SOURCE_NUMBER, Configuration::get(self::FR_CH_SOVENDUS_TRAFFIC_SOURCE_NUMBER)),
+            self::FR_CH_SOVENDUS_TRAFFIC_MEDIUM_NUMBER => Tools::getValue(self::FR_CH_SOVENDUS_TRAFFIC_MEDIUM_NUMBER, Configuration::get(self::FR_CH_SOVENDUS_TRAFFIC_MEDIUM_NUMBER)),
             
             self::FR_SOVENDUS_ACTIVE => Tools::getValue(self::FR_SOVENDUS_ACTIVE, Configuration::get(self::FR_SOVENDUS_ACTIVE)),
             self::FR_SOVENDUS_TRAFFIC_SOURCE_NUMBER => Tools::getValue(self::FR_SOVENDUS_TRAFFIC_SOURCE_NUMBER, Configuration::get(self::FR_SOVENDUS_TRAFFIC_SOURCE_NUMBER)),
@@ -1070,9 +1217,13 @@ class Ps_Sovendus extends Module
             self::ES_SOVENDUS_TRAFFIC_SOURCE_NUMBER => Tools::getValue(self::ES_SOVENDUS_TRAFFIC_SOURCE_NUMBER, Configuration::get(self::ES_SOVENDUS_TRAFFIC_SOURCE_NUMBER)),
             self::ES_SOVENDUS_TRAFFIC_MEDIUM_NUMBER => Tools::getValue(self::ES_SOVENDUS_TRAFFIC_MEDIUM_NUMBER, Configuration::get(self::ES_SOVENDUS_TRAFFIC_MEDIUM_NUMBER)),
             
-            self::BE_SOVENDUS_ACTIVE => Tools::getValue(self::BE_SOVENDUS_ACTIVE, Configuration::get(self::BE_SOVENDUS_ACTIVE)),
-            self::BE_SOVENDUS_TRAFFIC_SOURCE_NUMBER => Tools::getValue(self::BE_SOVENDUS_TRAFFIC_SOURCE_NUMBER, Configuration::get(self::BE_SOVENDUS_TRAFFIC_SOURCE_NUMBER)),
-            self::BE_SOVENDUS_TRAFFIC_MEDIUM_NUMBER => Tools::getValue(self::BE_SOVENDUS_TRAFFIC_MEDIUM_NUMBER, Configuration::get(self::BE_SOVENDUS_TRAFFIC_MEDIUM_NUMBER)),
+            self::NL_BE_SOVENDUS_ACTIVE => Tools::getValue(self::NL_BE_SOVENDUS_ACTIVE, Configuration::get(self::NL_BE_SOVENDUS_ACTIVE)),
+            self::NL_BE_SOVENDUS_TRAFFIC_SOURCE_NUMBER => Tools::getValue(self::NL_BE_SOVENDUS_TRAFFIC_SOURCE_NUMBER, Configuration::get(self::NL_BE_SOVENDUS_TRAFFIC_SOURCE_NUMBER)),
+            self::NL_BE_SOVENDUS_TRAFFIC_MEDIUM_NUMBER => Tools::getValue(self::NL_BE_SOVENDUS_TRAFFIC_MEDIUM_NUMBER, Configuration::get(self::NL_BE_SOVENDUS_TRAFFIC_MEDIUM_NUMBER)),
+
+            self::FR_BE_SOVENDUS_ACTIVE => Tools::getValue(self::FR_BE_SOVENDUS_ACTIVE, Configuration::get(self::FR_BE_SOVENDUS_ACTIVE)),
+            self::FR_BE_SOVENDUS_TRAFFIC_SOURCE_NUMBER => Tools::getValue(self::FR_BE_SOVENDUS_TRAFFIC_SOURCE_NUMBER, Configuration::get(self::FR_BE_SOVENDUS_TRAFFIC_SOURCE_NUMBER)),
+            self::FR_BE_SOVENDUS_TRAFFIC_MEDIUM_NUMBER => Tools::getValue(self::FR_BE_SOVENDUS_TRAFFIC_MEDIUM_NUMBER, Configuration::get(self::FR_BE_SOVENDUS_TRAFFIC_MEDIUM_NUMBER)),
             
             self::PL_SOVENDUS_ACTIVE => Tools::getValue(self::PL_SOVENDUS_ACTIVE, Configuration::get(self::PL_SOVENDUS_ACTIVE)),
             self::PL_SOVENDUS_TRAFFIC_SOURCE_NUMBER => Tools::getValue(self::PL_SOVENDUS_TRAFFIC_SOURCE_NUMBER, Configuration::get(self::PL_SOVENDUS_TRAFFIC_SOURCE_NUMBER)),
