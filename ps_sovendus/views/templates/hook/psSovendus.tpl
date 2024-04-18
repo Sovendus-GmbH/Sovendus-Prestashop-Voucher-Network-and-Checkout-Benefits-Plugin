@@ -30,7 +30,7 @@
       orderCurrency: "{$currency}",
       usedCouponCode: "{$usedCouponCode}",
       iframeContainerId: "sovendus-integration-container",
-      integrationType: "prestashop-1.1.3"
+      integrationType: "prestashop-1.2.0"
     });
     window.sovConsumer = window.sovConsumer || {};
     window.sovConsumer = {
