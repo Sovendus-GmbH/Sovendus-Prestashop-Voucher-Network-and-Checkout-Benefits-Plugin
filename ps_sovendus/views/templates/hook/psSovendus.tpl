@@ -16,9 +16,6 @@
     isActive = true;
   }
   if (isActive && Number(trafficSourceNumber) > 0 && Number(trafficMediumNumber) > 0) {
-    const isSovendusSale = document.cookie.split("; ").find(function(entry) {
-      return entry.startsWith("isSovendusSale=");
-    });
     window.sovIframes = window.sovIframes || [];
     window.sovIframes.push({
       trafficSourceNumber: trafficSourceNumber,
@@ -30,7 +27,7 @@
       orderCurrency: "{$currency}",
       usedCouponCode: "{$usedCouponCode}",
       iframeContainerId: "sovendus-integration-container",
-      integrationType: "prestashop-1.2.0"
+      integrationType: "prestashop-1.2.1"
     });
     window.sovConsumer = window.sovConsumer || {};
     window.sovConsumer = {
