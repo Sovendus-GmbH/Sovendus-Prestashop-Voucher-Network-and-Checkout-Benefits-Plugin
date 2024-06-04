@@ -71,7 +71,7 @@ class Ps_Sovendus extends Module
     {
         $this->name = 'ps_sovendus';
         $this->author = 'Sovendus - Marcus Brandstätter';
-        $this->version = '1.2.1';
+        $this->version = '1.2.2';
         $this->tab = 'front_office_features';
         $this->need_instance = 0;
 
@@ -174,6 +174,7 @@ class Ps_Sovendus extends Module
         $usedCouponCode = $cart_rule ? ($cart_rule[0])["code"] : "";
 
         $this->context->smarty->assign(
+            "sovendusData",
             array(
                 "currency" => $currency,
                 "order" => $order,
@@ -190,7 +191,7 @@ class Ps_Sovendus extends Module
                 "email" => $email,
                 "sessionId" => $sessionId,
                 "usedCouponCode" => $usedCouponCode,
-                "isActive"=> json_encode($sovendusActive),
+                "isActive" => json_encode($sovendusActive),
                 "trafficSourceNumber" => json_encode($trafficSourceNumber),
                 "trafficMediumNumber" => json_encode($trafficMediumNumber),
             )
