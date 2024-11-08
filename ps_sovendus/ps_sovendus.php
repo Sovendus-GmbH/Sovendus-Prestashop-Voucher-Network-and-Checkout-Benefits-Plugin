@@ -78,7 +78,7 @@ class Ps_Sovendus extends Module
     {
         $this->name = 'ps_sovendus';
         $this->author = 'Sovendus - Marcus Brandstätter';
-        $this->version = '1.2.3';
+        $this->version = '1.2.4';
         $this->tab = 'front_office_features';
         $this->need_instance = 0;
 
@@ -186,6 +186,20 @@ class Ps_Sovendus extends Module
         $cart_rule = $cart->getCartRules();
         $usedCouponCode = $cart_rule ? ($cart_rule[0])["code"] : "";
 
+        // Get the used coupon code
+        $usedCouponCode = "";
+        if (!empty($cart_rule)) {
+            $usedCouponCode = isset($cart_rule[0]["code"]) ? $cart_rule[0]["code"] : "";
+        }
+
+        // Fallback for older versions if cart rule code is empty
+        if (empty($usedCouponCode)) {
+            $cart_rule = $order->getCartRules();
+            if (!empty($orderCartRules)) {
+                $usedCouponCode = isset($orderCartRules[0]["code"]) ? $orderCartRules[0]["code"] : "";
+            }
+        }
+
         $this->context->smarty->assign(
             "sovendusData",
             array(
@@ -204,6 +218,7 @@ class Ps_Sovendus extends Module
                 "email" => $email,
                 "sessionId" => $sessionId,
                 "usedCouponCode" => $usedCouponCode,
+                "cart_rule" => htmlspecialchars(json_encode($cart_rule), ENT_QUOTES, 'UTF-8'),
                 "isActive" => json_encode($sovendusActive),
                 "trafficSourceNumber" => json_encode($trafficSourceNumber),
                 "trafficMediumNumber" => json_encode($trafficMediumNumber),
@@ -211,7 +226,6 @@ class Ps_Sovendus extends Module
         );
         return $this->display(__FILE__, 'views/templates/hook/psSovendus.tpl');
     }
-
     function getSovendusConfig($countryCode)
     {
         switch ($countryCode) {

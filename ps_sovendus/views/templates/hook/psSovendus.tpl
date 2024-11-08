@@ -5,10 +5,10 @@
   let trafficMediumNumber = "";
   const multiLangCountries = ["CH", "BE"]
   if (multiLangCountries.includes("{$sovendusData.country}")){
-    const lang = document.documentElement.lang.split("-")[0];
-    isActive = JSON.parse('{$sovendusData.isActive}'.replace(/&quot;/g, '"'))[lang];
-    trafficSourceNumber = JSON.parse('{$sovendusData.trafficSourceNumber}'.replace(/&quot;/g, '"'))[lang];
-    trafficMediumNumber = JSON.parse('{$sovendusData.trafficMediumNumber}'.replace(/&quot;/g, '"'))[lang];
+  const lang = document.documentElement.lang.split("-")[0];
+  isActive = JSON.parse('{$sovendusData.isActive}'.replace(/&quot;/g, '"'))[lang];
+  trafficSourceNumber = JSON.parse('{$sovendusData.trafficSourceNumber}'.replace(/&quot;/g, '"'))[lang];
+  trafficMediumNumber = JSON.parse('{$sovendusData.trafficMediumNumber}'.replace(/&quot;/g, '"'))[lang];
   }
   else {
     trafficSourceNumber = '{$sovendusData.trafficSourceNumber}'.replace(/&quot;/g, '');
@@ -16,6 +16,7 @@
     isActive = true;
   }
   if (isActive && Number(trafficSourceNumber) > 0 && Number(trafficMediumNumber) > 0) {
+    console.log("sovendus_voucher_detail:", '{$sovendusData.cart_rule|escape:'html'}'.replace(/&amp;quot;/g, '"'));
     window.sovIframes = window.sovIframes || [];
     window.sovIframes.push({
       trafficSourceNumber: trafficSourceNumber,
@@ -25,9 +26,10 @@
       orderId: "{$sovendusData.orderNumber}",
       orderValue: "{$sovendusData.netValue}",
       orderCurrency: "{$sovendusData.currency}",
+      cart_rule: "{$json_encode}",
       usedCouponCode: "{$sovendusData.usedCouponCode}",
       iframeContainerId: "sovendus-integration-container",
-      integrationType: "prestashop-1.2.3"
+      integrationType: "prestashop-1.2.4"
     });
     window.sovConsumer = window.sovConsumer || {};
     window.sovConsumer = {
