@@ -1,0 +1,41 @@
+{
+  "name": "sovendus_app_prestashop",
+  "version": "2.0.0",
+  "description": "Sovendus App",
+  "private": true,
+  "scripts": {
+    "dev": "yarn build && ./run-dev-docker.sh",
+    "build": "sovendus-builder build",
+    "lint": "eslint --fix",
+    "test": "# todo",
+    "pub": "sovendus-release-tool"
+  },
+  "dependencies": {
+    "react": "19.1.0",
+    "react-dom": "19.1.0",
+    "sovendus-integration-scripts": "3.11.12",
+    "sovendus-integration-settings-ui": "^4.3.20",
+    "sovendus-integration-types": "^3.8.14"
+  },
+  "devDependencies": {
+    "@types/eslint": "9.6.1",
+    "@types/react": "19.1.2",
+    "@types/react-dom": "19.1.2",
+    "@typescript-eslint/eslint-plugin": "8.31.1",
+    "@typescript-eslint/parser": "8.31.1",
+    "eslint": "9.25.1",
+    "eslint-config-prettier": "10.1.2",
+    "eslint-plugin-import": "2.31.0",
+    "eslint-plugin-prettier": "5.2.6",
+    "eslint-plugin-react-compiler": "19.1.0-rc.1",
+    "eslint-plugin-react-hooks": "5.2.0",
+    "eslint-plugin-simple-import-sort": "12.1.1",
+    "eslint-plugin-unused-imports": "4.1.4",
+    "prettier": "3.5.3",
+    "prettier-eslint": "16.4.1",
+    "prettier-plugin-sort-json": "4.1.1",
+    "sovendus-builder": "1.4.6",
+    "sovendus-release-tool": "^1.4.7",
+    "typescript": "5.8.3"
+  }
+}

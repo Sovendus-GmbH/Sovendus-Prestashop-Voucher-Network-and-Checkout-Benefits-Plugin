@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <module>
     <name>ps_sovendus</name>
-    <displayName><![CDATA[Sovendus Voucher Network & Checkout Benefits]]></displayName>
+    <displayName><![CDATA[Sovendus App]]></displayName>
     <version><![CDATA[1.0.1]]></version>
-    <description><![CDATA[Offizielles Sovendus Voucher Network & Checkout Benefits Modul für Prestashop]]></description>
+    <description><![CDATA[Offizielles Sovendus Modul für Prestashop]]></description>
     <author><![CDATA[Sovendus - Marcus Brandstätter]]></author>
     <tab><![CDATA[front_office_features]]></tab>
     <is_configurable>1</is_configurable>

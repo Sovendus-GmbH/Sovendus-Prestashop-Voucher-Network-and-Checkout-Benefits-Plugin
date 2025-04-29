@@ -1,7 +1,7 @@
 {
   "name": "sovendus/ps_sovendus",
-  "description": "Sovendus Voucher Network & Checkout Benefits",
-  "homepage": "https://online.sovendus.com/kontakt/kontakt-firmenkunden/",
+  "description": "Sovendus App",
+  "homepage": "https://sovendus.com",
   "license": "GPL-3.0",
   "authors": [
     {
