@@ -23,7 +23,7 @@
       step((generator = generator.apply(__this, __arguments)).next());
     });
   };
-  const integrationScriptVersion = "3.11.12";
+  const integrationScriptVersion = "3.11.13";
   var CountryCodes = /* @__PURE__ */ ((CountryCodes2) => {
     CountryCodes2["AT"] = "AT";
     CountryCodes2["BE"] = "BE";

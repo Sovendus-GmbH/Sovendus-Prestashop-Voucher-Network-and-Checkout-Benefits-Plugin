@@ -13,7 +13,7 @@
   "dependencies": {
     "react": "19.1.0",
     "react-dom": "19.1.0",
-    "sovendus-integration-scripts": "3.11.12",
+    "sovendus-integration-scripts": "3.11.13",
     "sovendus-integration-settings-ui": "^4.3.21",
     "sovendus-integration-types": "^3.8.14"
   },
