@@ -4116,10 +4116,10 @@ sovendus-integration-scripts@3.11.12:
     react "^18"
     react-dom "^18"
 
-sovendus-integration-settings-ui@^4.3.20:
-  version "4.3.20"
-  resolved "https://registry.yarnpkg.com/sovendus-integration-settings-ui/-/sovendus-integration-settings-ui-4.3.20.tgz#ea7fa5b31a53f4b45b5126ff5d7a63f5b5a2318b"
-  integrity sha512-6Ee/Zc33owKvxZYjLxyVxW1OeGFz5Su77Nm0CIk+LNgx69ZKkGzFa9CIqZKjfKhhdBqLUZ6XqFcSLg4jAw58BA==
+sovendus-integration-settings-ui@^4.3.21:
+  version "4.3.21"
+  resolved "https://registry.yarnpkg.com/sovendus-integration-settings-ui/-/sovendus-integration-settings-ui-4.3.21.tgz#31ffb0799fcb266cdfab1e152fc4e0d10025bec7"
+  integrity sha512-704wP9oM/ZkIj+Ku+cqOy27oa8ruppgoX3Vz+s6Xm8gjy+Wtxq1/YXgcOgNH5LylhtkRgZHVDIuRInPR6sHWHw==
   dependencies:
     sovendus-integration-types "3.8.14"
   optionalDependencies:
