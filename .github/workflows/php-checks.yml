@@ -1,0 +1,87 @@
+name: PrestaShop PHP Compatibility & Lint Checks
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  create:
+    tags:
+      - "*"
+
+jobs:
+  php_checks:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ps_sovendus
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          submodules: true
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: "7.1"
+          tools: composer, phpcs, phpstan
+          coverage: none
+
+      - name: Install PHPCompatibility and PHP_CodeSniffer
+        run: |
+          composer global require "squizlabs/php_codesniffer"
+          composer global require "phpcompatibility/php-compatibility"
+
+          # Find PHPCS path
+          PHPCS_PATH=$(composer global config bin-dir --absolute)/phpcs
+
+          # Find PHPCompatibility path
+          PHP_COMPATIBILITY_PATH=$(composer global config home)/vendor/phpcompatibility/php-compatibility
+
+          # Register PHPCompatibility with PHPCS
+          $PHPCS_PATH --config-set installed_paths $PHP_COMPATIBILITY_PATH
+
+          # Verify installation
+          $PHPCS_PATH -i
+
+      - name: Install dependencies
+        run: |
+          if [ -f "composer.json" ]; then
+            composer update --no-progress --prefer-dist --optimize-autoloader
+          else
+            echo "No composer.json found, skipping dependencies installation"
+          fi
+
+      - name: Run PHP Compatibility Check
+        run: |
+          # Check PHP compatibility for PrestaShop 1.7+ (PHP 7.1+)
+          phpcs --standard=PHPCompatibility --runtime-set testVersion 7.1- --ignore=vendor/* -p .
+
+      - name: PHP Syntax Check
+        run: |
+          find . -name "*.php" -not -path "./vendor/*" -print0 | xargs -0 -n1 php -l
+
+      - name: Run PHPStan (if phpstan.neon exists)
+        run: |
+          if [ -f "phpstan.neon" ]; then
+            vendor/bin/phpstan analyse --memory-limit=2G -c phpstan.neon || exit 1
+          else
+            echo "No phpstan.neon found, creating basic configuration"
+            echo "parameters:
+              level: 0
+              paths:
+                - .
+              excludePaths:
+                - vendor
+            " > phpstan.neon
+            vendor/bin/phpstan analyse --memory-limit=2G -c phpstan.neon || exit 1
+          fi
+
+      - name: Check PrestaShop Coding Standards
+        run: |
+          # Basic PrestaShop coding standards check
+          phpcs --standard=PSR2 --extensions=php --ignore=vendor/* -p .
