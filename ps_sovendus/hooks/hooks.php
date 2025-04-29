@@ -152,14 +152,29 @@ function sovendus_get_formatted_salutation($titleId)
  */
 function sovendus_get_coupon_codes($order)
 {
+    $couponCodes = [];
+
+    // Try to get coupon codes from cart
     $cart = new Cart($order->id_cart);
     $cart_rule = $cart->getCartRules();
-    $couponCodes = [];
 
     if (!empty($cart_rule)) {
         foreach ($cart_rule as $rule) {
             if (!empty($rule['code'])) {
                 $couponCodes[] = $rule['code'];
+            }
+        }
+    }
+
+    // Fallback for older versions if no coupon codes were found
+    if (empty($couponCodes)) {
+        // Try to get coupon codes directly from the order
+        $orderCartRules = $order->getCartRules();
+        if (!empty($orderCartRules)) {
+            foreach ($orderCartRules as $rule) {
+                if (!empty($rule['code'])) {
+                    $couponCodes[] = $rule['code'];
+                }
             }
         }
     }
