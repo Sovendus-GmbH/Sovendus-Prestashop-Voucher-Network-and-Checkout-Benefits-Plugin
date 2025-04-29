@@ -62,52 +62,20 @@ jobs:
           PHPCS_PATH=$(composer global config bin-dir --absolute)/phpcs
 
           # Check PHP compatibility for PrestaShop 1.7+ (PHP 7.1+)
-          $PHPCS_PATH --standard=PHPCompatibility --runtime-set testVersion 7.1- --ignore=vendor/* -p . || echo "PHP Compatibility issues found but continuing workflow"
+          $PHPCS_PATH --standard=PHPCompatibility --runtime-set testVersion 7.1- --ignore=vendor/* -p .
 
       - name: PHP Syntax Check
         run: |
           find . -name "*.php" -not -path "./vendor/*" -print0 | xargs -0 -n1 php -l
 
-      - name: Run PHPStan (if available)
+      - name: Run PHPStan
         run: |
-          # Check if composer.json exists and if phpstan is a dependency
-          if [ -f "composer.json" ] && grep -q "phpstan/phpstan" composer.json; then
-            # Install phpstan if it's in composer.json
-            composer require --dev phpstan/phpstan
+          # Install PHPStan
+          composer global require phpstan/phpstan
 
-            # Check if phpstan.neon exists
-            if [ -f "phpstan.neon" ]; then
-              vendor/bin/phpstan analyse --memory-limit=2G -c phpstan.neon || exit 1
-            else
-              echo "No phpstan.neon found, creating basic configuration"
-              echo "parameters:
-                level: 0
-                paths:
-                  - .
-                excludePaths:
-                  - vendor
-              " > phpstan.neon
-              vendor/bin/phpstan analyse --memory-limit=2G -c phpstan.neon || exit 1
-            fi
-          else
-            # Install phpstan globally if not in composer.json
-            composer global require phpstan/phpstan
-
-            # Create a basic configuration if needed
-            if [ ! -f "phpstan.neon" ]; then
-              echo "No phpstan.neon found, creating basic configuration"
-              echo "parameters:
-                level: 0
-                paths:
-                  - .
-                excludePaths:
-                  - vendor
-              " > phpstan.neon
-            fi
-
-            # Run phpstan using global installation
-            ~/.composer/vendor/bin/phpstan analyse --memory-limit=2G -c phpstan.neon || echo "PHPStan found issues but continuing workflow"
-          fi
+          # Run PHPStan with the provided configuration
+          # Using global installation to avoid dependency issues
+          ~/.composer/vendor/bin/phpstan analyse --memory-limit=2G -c phpstan.neon
 
       - name: Check PrestaShop Coding Standards
         run: |
@@ -115,4 +83,4 @@ jobs:
           PHPCS_PATH=$(composer global config bin-dir --absolute)/phpcs
 
           # Basic PrestaShop coding standards check (PSR2)
-          $PHPCS_PATH --standard=PSR2 --extensions=php --ignore=vendor/* -p . || echo "Coding standards issues found but continuing workflow"
+          $PHPCS_PATH --standard=PSR2 --extensions=php --ignore=vendor/* -p .

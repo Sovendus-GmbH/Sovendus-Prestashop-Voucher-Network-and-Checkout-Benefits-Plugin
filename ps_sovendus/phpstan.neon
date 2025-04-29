@@ -1,0 +1,45 @@
+parameters:
+    # Level 0 is the loosest level, 8 is the strictest
+    # Start with a lower level and gradually increase as you fix issues
+    level: 8
+    
+    paths:
+        - .
+    
+    excludePaths:
+        - vendor/
+        - tests/
+    
+    # Ignore some common PrestaShop-specific issues
+    ignoreErrors:
+        # Ignore errors about undefined variables in PrestaShop context
+        - '#Undefined variable: \$smarty#'
+        - '#Undefined variable: \$this->context#'
+        - '#Call to an undefined method [a-zA-Z0-9\\_]+::l\(\)#'
+        
+    # Ignore errors from dynamically loaded PrestaShop classes
+    universalObjectCratesClasses:
+        - Context
+        - Controller
+        - Module
+        - ObjectModel
+        - Shop
+        - Configuration
+        - Tools
+        - Db
+        - DbQuery
+        - Cookie
+        - Customer
+        - Order
+        - Cart
+        - Address
+        - Country
+        - Currency
+        - Language
+        - Gender
+        
+    # Ignore errors about missing return typehints in PrestaShop methods
+    checkMissingIterableValueType: false
+    
+    # Ignore errors about missing property typehints in PrestaShop classes
+    checkGenericClassInNonGenericObjectType: false
