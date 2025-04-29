@@ -21,7 +21,7 @@ Coming soon...
 
 ### Manual Installation
 
-1. Download the latest version [from here](https://raw.githubusercontent.com/Sovendus-GmbH/Sovendus-Prestashop-Voucher-Network-and-Checkout-Benefits-Plugin/main/releases/ps_sovendus-latest.zip)
+1. Download the latest version [from here](https://raw.githubusercontent.com/Sovendus-GmbH/Sovendus-Prestashop-Voucher-Network-and-Checkout-Benefits-Plugin/main/releases/sovendus_app_prestashop_latest.zip)
 2. In your PrestaShop admin panel, go to: Modules → Module Manager
 3. On the top right, click on "Upload a Module" and select the downloaded module zip file
 4. The module will be installed automatically
