@@ -70,12 +70,32 @@ jobs:
 
       - name: Run PHPStan
         run: |
-          # Install PHPStan
-          composer global require phpstan/phpstan
+          # Create composer.json if it doesn't exist
+          if [ ! -f "composer.json" ]; then
+            echo '{
+              "name": "sovendus/ps_sovendus",
+              "description": "Sovendus for PrestaShop",
+              "type": "prestashop-module",
+              "require": {
+                "php": ">=7.1"
+              },
+              "require-dev": {
+                "phpstan/phpstan": "^1.0",
+                "phpstan/extension-installer": "^1.0",
+                "prestashop/php-dev-tools": "^4.3"
+              },
+              "config": {
+                "preferred-install": "dist",
+                "prepend-autoloader": false
+              }
+            }' > composer.json
+          fi
 
-          # Run PHPStan with the provided configuration
-          # Using global installation to avoid dependency issues
-          ~/.composer/vendor/bin/phpstan analyse --memory-limit=2G -c phpstan.neon
+          # Install dependencies including PrestaShop PHPStan extension
+          composer update --no-interaction --prefer-dist
+
+          # Run PHPStan with PrestaShop extension
+          vendor/bin/phpstan analyse --memory-limit=2G --no-progress
 
       - name: Check PrestaShop Coding Standards
         run: |
