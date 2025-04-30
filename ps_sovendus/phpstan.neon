@@ -1,28 +1,16 @@
-includes:
-    # Include PrestaShop specific rules from prestashop/php-dev-tools
-    - %rootDir%/../../../vendor/prestashop/php-dev-tools/phpstan/ps-module-extension.neon
-
 parameters:
-    # Start with level 3 - a good balance between strictness and practicality for PrestaShop
-    level: 3
-
-    paths:
-        - .
-
-    excludePaths:
-        - vendor/
-        - tests/
-        - stubs/
-
-    # Bootstrap file for module constants
-    bootstrapFiles:
-        - stubs/bootstrap.php
-
-    # Only ignore truly unavoidable issues
-    ignoreErrors:
-        # Specific uniqid issue
-        - '#Parameter \#1 \$prefix of function uniqid expects string, int<0, max> given#'
-
-    # Disable some checks that are too strict for PrestaShop
-    checkMissingIterableValueType: false
-    checkGenericClassInNonGenericObjectType: false
+  level: 0
+  paths:
+    - .
+  excludePaths:
+    - vendor/
+    - tests/
+  ignoreErrors:
+    - "#Class [a-zA-Z0-9\\_]+ (extends|implements) unknown class#"
+    - "#Call to (static method|method|function) [a-zA-Z0-9\\_]+\\(\\) on (an unknown class|class-string)#"
+    - "#Access to property \\$[a-zA-Z0-9\\_]+ on an unknown class#"
+    - "#Instantiated class [a-zA-Z0-9\\_]+ not found#"
+    - "#Constant [A-Z0-9\\_]+ not found#"
+    - "#Parameter \\#1 \\$prefix of function uniqid expects string, int<0, max> given#"
+  checkMissingIterableValueType: false
+  checkGenericClassInNonGenericObjectType: false

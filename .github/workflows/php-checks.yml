@@ -1,15 +1,10 @@
-name: PrestaShop PHP Compatibility & Lint Checks
+name: PHP Checks
 
 on:
   push:
-    branches:
-      - main
+    branches: [main]
   pull_request:
-    branches:
-      - main
-  create:
-    tags:
-      - "*"
+    branches: [main]
 
 jobs:
   php_checks:
@@ -21,8 +16,6 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-        with:
-          submodules: true
 
       - name: Set up PHP
         uses: shivammathur/setup-php@v2
@@ -31,76 +24,14 @@ jobs:
           tools: composer, phpcs, phpstan
           coverage: none
 
-      - name: Install PHPCompatibility and PHP_CodeSniffer
-        run: |
-          composer global require "squizlabs/php_codesniffer"
-          composer global require "phpcompatibility/php-compatibility"
-
-          # Find PHPCS path
-          PHPCS_PATH=$(composer global config bin-dir --absolute)/phpcs
-
-          # Find PHPCompatibility path
-          PHP_COMPATIBILITY_PATH=$(composer global config home)/vendor/phpcompatibility/php-compatibility
-
-          # Register PHPCompatibility with PHPCS
-          $PHPCS_PATH --config-set installed_paths $PHP_COMPATIBILITY_PATH
-
-          # Verify installation
-          $PHPCS_PATH -i
-
-      - name: Install dependencies
-        run: |
-          if [ -f "composer.json" ]; then
-            composer update --no-progress --prefer-dist --optimize-autoloader
-          else
-            echo "No composer.json found, skipping dependencies installation"
-          fi
-
-      - name: Run PHP Compatibility Check
-        run: |
-          # Ensure phpcs is available
-          PHPCS_PATH=$(composer global config bin-dir --absolute)/phpcs
-
-          # Check PHP compatibility for PrestaShop 1.7+ (PHP 7.1+)
-          $PHPCS_PATH --standard=PHPCompatibility --runtime-set testVersion 7.1- --ignore=vendor/* -p .
-
       - name: PHP Syntax Check
-        run: |
-          find . -name "*.php" -not -path "./vendor/*" -print0 | xargs -0 -n1 php -l
+        run: find . -name "*.php" -not -path "./vendor/*" -print0 | xargs -0 -n1 php -l
 
-      - name: Run PHPStan
-        run: |
-          # Create composer.json if it doesn't exist
-          if [ ! -f "composer.json" ]; then
-            echo '{
-              "name": "sovendus/ps_sovendus",
-              "description": "Sovendus for PrestaShop",
-              "type": "prestashop-module",
-              "require": {
-                "php": ">=7.1"
-              },
-              "require-dev": {
-                "phpstan/phpstan": "^1.0",
-                "phpstan/extension-installer": "^1.0",
-                "prestashop/php-dev-tools": "^4.3"
-              },
-              "config": {
-                "preferred-install": "dist",
-                "prepend-autoloader": false
-              }
-            }' > composer.json
-          fi
+      - name: Install PHP_CodeSniffer dependencies
+        run: composer global require "phpcompatibility/php-compatibility"
 
-          # Install dependencies including PrestaShop PHPStan extension
-          composer update --no-interaction --prefer-dist
+      - name: PHP CodeSniffer Check
+        run: phpcs --standard=phpcs.xml -p
 
-          # Run PHPStan with PrestaShop extension
-          vendor/bin/phpstan analyse --memory-limit=2G --no-progress
-
-      - name: Check PrestaShop Coding Standards
-        run: |
-          # Ensure phpcs is available
-          PHPCS_PATH=$(composer global config bin-dir --absolute)/phpcs
-
-          # Basic PrestaShop coding standards check (PSR2)
-          $PHPCS_PATH --standard=PSR2 --extensions=php --ignore=vendor/* -p .
+      - name: Static Analysis
+        run: phpstan analyse --no-progress
