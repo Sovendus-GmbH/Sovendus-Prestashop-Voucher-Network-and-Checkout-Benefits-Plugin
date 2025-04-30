@@ -5,7 +5,7 @@ const releaseConfig: ReleaseConfig = {
     {
       directory: "./",
       release: {
-        version: "2.0.0",
+        version: "2.0.1",
         versionBumper: [
           {
             filePath: "ps_sovendus/constants.php",
