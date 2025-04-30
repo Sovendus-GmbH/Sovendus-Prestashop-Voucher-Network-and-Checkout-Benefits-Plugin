@@ -1,18 +1,19 @@
 <?xml version="1.0"?>
 <ruleset name="PrestaShop Module Standard">
-    <description>PrestaShop coding standards</description>
-
-    <!-- Scan these files -->
-    <file>.</file>
-    
-    <!-- Exclude vendor files -->
-    <exclude-pattern>*/vendor/*</exclude-pattern>
-    <exclude-pattern>*/tests/*</exclude-pattern>
-    
-    <!-- Use PSR2 as the base -->
-    <rule ref="PSR2"/>
-    
-    <!-- PHP compatibility configuration -->
-    <config name="testVersion" value="7.1-"/>
-    <rule ref="PHPCompatibility"/>
+	<description>
+		PrestaShop coding standards
+	</description>
+	<!-- Scan these files -->
+	<file>
+		.
+	</file>
+	<!-- Exclude vendor files -->
+	<exclude-pattern>
+		*/vendor/*
+	</exclude-pattern>
+	<exclude-pattern>
+		*/tests/*
+	</exclude-pattern>
+	<!-- Use PSR2 as the base -->
+	<rule ref="PSR2" />
 </ruleset>

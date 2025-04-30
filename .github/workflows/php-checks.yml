@@ -28,9 +28,18 @@ jobs:
         run: find . -name "*.php" -not -path "./vendor/*" -print0 | xargs -0 -n1 php -l
 
       - name: Install PHP_CodeSniffer dependencies
-        run: composer global require "phpcompatibility/php-compatibility"
+        run: |
+          composer global require "phpcompatibility/php-compatibility"
 
-      - name: PHP CodeSniffer Check
+          # Register PHPCompatibility with PHPCS
+          PHPCS_PATH=$(composer global config bin-dir --absolute)/phpcs
+          PHP_COMPATIBILITY_PATH=$(composer global config home)/vendor/phpcompatibility/php-compatibility
+          $PHPCS_PATH --config-set installed_paths $PHP_COMPATIBILITY_PATH
+
+      - name: PHP Compatibility Check
+        run: phpcs --standard=PHPCompatibility --runtime-set testVersion 7.1- --extensions=php --ignore=vendor/* -p .
+
+      - name: Coding Standards Check
         run: phpcs --standard=phpcs.xml -p
 
       - name: Static Analysis
