@@ -12,7 +12,7 @@ if (!defined('_PS_VERSION_')) {
     exit;
 }
 
-define('SOVENDUS_VERSION', '2.0.3');
+define('SOVENDUS_VERSION', '2.0.4');
 define('SOVENDUS_INTEGRATION_TYPE', "prestashop-" . SOVENDUS_VERSION);
 
 define('SOVENDUS_SETTINGS', 'SOVENDUS_SETTINGS');
