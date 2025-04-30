@@ -5,7 +5,7 @@ const releaseConfig: ReleaseConfig = {
     {
       directory: "./",
       release: {
-        version: "2.0.1",
+        version: "2.0.2",
         foldersToZip: [
           {
             input: "ps_sovendus",

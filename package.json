@@ -1,6 +1,6 @@
 {
   "name": "sovendus_app_prestashop",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "Sovendus App",
   "private": true,
   "scripts": {
