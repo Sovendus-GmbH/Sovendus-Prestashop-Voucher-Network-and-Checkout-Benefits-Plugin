@@ -1511,7 +1511,7 @@ archiver-utils@^5.0.0, archiver-utils@^5.0.2:
     normalize-path "^3.0.0"
     readable-stream "^4.0.0"
 
-archiver@7.0.1:
+archiver@7.0.1, archiver@^7.0.1:
   version "7.0.1"
   resolved "https://registry.yarnpkg.com/archiver/-/archiver-7.0.1.tgz#c9d91c350362040b8927379c7aa69c0655122f61"
   integrity sha512-ZcbTaIqJOfCc03QwD468Unz/5Ir8ATtvAHsK+FdXbDIbGfihqh9mrvdcYunQzqn4HrvWWaFyaxJhGZagaJJpPQ==
@@ -4132,15 +4132,16 @@ sovendus-integration-types@3.8.14, sovendus-integration-types@^3.8.14:
   optionalDependencies:
     zod "^3.24.2"
 
-sovendus-release-tool@^1.4.7:
-  version "1.4.7"
-  resolved "https://registry.yarnpkg.com/sovendus-release-tool/-/sovendus-release-tool-1.4.7.tgz#1f6060cb36b6755c8e5a3c0b13ada45a3d470957"
-  integrity sha512-Ta/tF/opgH5a9ZsNtXlfPVM66v/RizTYeUShHWHgQMUz2sDVjHSMbwkfkpxSHjHqPo0UKjNznRuZSza/wufVrA==
+sovendus-release-tool@^1.5.1:
+  version "1.5.1"
+  resolved "https://registry.yarnpkg.com/sovendus-release-tool/-/sovendus-release-tool-1.5.1.tgz#0058260177114a20aa4ffb258892cbddb71bfd1d"
+  integrity sha512-k3GSgAmgPG81ArwzFa+YP/evDFtyKQ4C4+6Jy4mhqcJ2xowOpzk/CgkwF08j+QyQnxJoKElqYww96MWPmlvUiA==
   dependencies:
+    archiver "^7.0.1"
     commander "13.1.0"
     inquirer "^12.6.0"
     npm-check-updates "18.0.1"
-    vite "^6.3.3"
+    vite "^6.3.4"
 
 sprintf-js@~1.0.2:
   version "1.0.3"
@@ -4541,10 +4542,10 @@ vite@6.3.0:
   optionalDependencies:
     fsevents "~2.3.3"
 
-vite@^6.3.3:
-  version "6.3.3"
-  resolved "https://registry.yarnpkg.com/vite/-/vite-6.3.3.tgz#497392c3f2243194e4dbf09ea83e9a3dddf49b88"
-  integrity sha512-5nXH+QsELbFKhsEfWLkHrvgRpTdGJzqOZ+utSdmPTvwHmvU6ITTm3xx+mRusihkcI8GeC7lCDyn3kDtiki9scw==
+vite@^6.3.4:
+  version "6.3.4"
+  resolved "https://registry.yarnpkg.com/vite/-/vite-6.3.4.tgz#d441a72c7cd9a93b719bb851250a4e6c119c9cff"
+  integrity sha512-BiReIiMS2fyFqbqNT/Qqt4CVITDU9M9vE+DKcVAsB+ZV0wvTKd+3hMbkpxz1b+NmEDMegpVbisKiAZOnvO92Sw==
   dependencies:
     esbuild "^0.25.0"
     fdir "^6.4.4"
