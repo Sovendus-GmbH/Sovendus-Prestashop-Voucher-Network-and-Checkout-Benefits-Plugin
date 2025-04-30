@@ -33,7 +33,6 @@ const buildConfig: BuildConfig = {
       output: "ps_sovendus/logo.png",
     },
   ],
-
 };
 
 export default buildConfig;
