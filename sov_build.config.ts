@@ -33,16 +33,7 @@ const buildConfig: BuildConfig = {
       output: "ps_sovendus/logo.png",
     },
   ],
-  foldersToZip: [
-    {
-      input: "ps_sovendus",
-      output: "releases/%NAME%_%VERSION%.zip",
-    },
-    {
-      input: "ps_sovendus",
-      output: "releases/%NAME%_latest.zip",
-    },
-  ],
+
 };
 
 export default buildConfig;

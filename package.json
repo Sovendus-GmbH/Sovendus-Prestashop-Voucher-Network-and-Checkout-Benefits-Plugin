@@ -34,7 +34,7 @@
     "prettier": "3.5.3",
     "prettier-eslint": "16.4.1",
     "prettier-plugin-sort-json": "4.1.1",
-    "sovendus-builder": "1.4.6",
+    "sovendus-builder": "1.5.0",
     "sovendus-release-tool": "^1.5.1",
     "typescript": "5.8.3"
   }

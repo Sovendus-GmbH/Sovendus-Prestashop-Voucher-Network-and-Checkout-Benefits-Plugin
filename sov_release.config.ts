@@ -6,6 +6,16 @@ const releaseConfig: ReleaseConfig = {
       directory: "./",
       release: {
         version: "2.0.1",
+        foldersToZip: [
+          {
+            input: "ps_sovendus",
+            output: "releases/%NAME%_%VERSION%.zip",
+          },
+          {
+            input: "ps_sovendus",
+            output: "releases/%NAME%_latest.zip",
+          },
+        ],
         versionBumper: [
           {
             filePath: "ps_sovendus/constants.php",
